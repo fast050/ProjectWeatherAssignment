@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt.android)
 
 }
 
@@ -20,6 +22,8 @@ android {
 
 dependencies {
 
+    implementation project(":common")
+
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
@@ -36,4 +40,11 @@ dependencies {
     implementation libs.androidx.room.runtime
     ksp libs.androidx.room.compiler
     implementation libs.androidx.room.ktx
+
+
+    // hilt
+    implementation libs.hilt.android
+    ksp libs.hilt.android.compiler
+    implementation(libs.logging.interceptor)
+
 }
