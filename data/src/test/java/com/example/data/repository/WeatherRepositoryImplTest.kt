@@ -1,11 +1,10 @@
-package com.example.data
+package com.example.data.repository
 
 import com.example.common.Resources
 import com.example.data.local.WeatherSharedPreferences
 import com.example.data.mapper.toCountryInfo
 import com.example.data.mapper.toCurrentWeather
 import com.example.data.remote.WeatherApi
-import com.example.data.repository.WeatherRepositoryImpl
 import com.example.data.util.countryInfoResponseFake
 import com.example.data.util.currentWeatherResponseFake
 import kotlinx.coroutines.flow.last
