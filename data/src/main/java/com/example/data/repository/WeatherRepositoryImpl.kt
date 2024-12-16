@@ -7,6 +7,7 @@ import com.example.data.mapper.toCurrentWeather
 import com.example.data.remote.WeatherApi
 import com.example.data.repository.model.CountryInfo
 import com.example.data.repository.model.CurrentWeather
+import com.example.data.util.extractErrorMessage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -20,18 +21,18 @@ class WeatherRepositoryImpl @Inject constructor(
 
 
     override fun getCountries(query: String): Flow<Resources<List<CountryInfo>>> = flow {
+        emit(Resources.Loading())
         try {
             val countriesList = remoteSource.getCountries(query = query)
             println("log : $countriesList")
             emit(
-
                 Resources.Success(countriesList.map { it.toCountryInfo() })
             )
         }
         catch (e: HttpException) {
             emit(
                 Resources.Error(
-                    message = e.message ?: "Opps! something went wrong",
+                    message = e.extractErrorMessage(),
                     data = null
                 )
             )
@@ -48,6 +49,7 @@ class WeatherRepositoryImpl @Inject constructor(
 
 
     override fun getCurrentWeather(query: String): Flow<Resources<CurrentWeather>> = flow {
+        emit(Resources.Loading())
 
         val localCurrentWeather = localSource.getWeatherCurrent() // get data in shared preference
 
@@ -61,7 +63,7 @@ class WeatherRepositoryImpl @Inject constructor(
         catch (e: HttpException) {
             emit(
                 Resources.Error(
-                    message = e.message ?: "Opps! something went wrong",
+                    message = e.extractErrorMessage(),
                     data = localCurrentWeather
                 )
             )

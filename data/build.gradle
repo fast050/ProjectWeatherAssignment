@@ -47,4 +47,6 @@ dependencies {
     ksp libs.hilt.android.compiler
     implementation(libs.logging.interceptor)
 
+    testImplementation libs.kotlinx.coroutines.test
+    testImplementation libs.mockito.core
 }
