@@ -1,8 +1,8 @@
 package com.example.data.repository
 
 import com.example.common.Resources
-import com.example.data.repository.model.CountryInfo
-import com.example.data.repository.model.CurrentWeather
+import com.example.common.model.CountryInfo
+import com.example.common.model.CurrentWeather
 import kotlinx.coroutines.flow.Flow
 
 interface WeatherRepository {

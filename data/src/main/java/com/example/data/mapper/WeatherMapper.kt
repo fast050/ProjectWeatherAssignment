@@ -1,9 +1,9 @@
 package com.example.data.mapper
 
+import com.example.common.model.CountryInfo
+import com.example.common.model.CurrentWeather
 import com.example.data.remote.dto.CountryInfoResponse
 import com.example.data.remote.dto.CurrentWeatherResponse
-import com.example.data.repository.model.CountryInfo
-import com.example.data.repository.model.CurrentWeather
 
 
 

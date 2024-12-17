@@ -1,6 +1,6 @@
-package com.example.data.repository.model
+package com.example.common.model
 
-data class  CurrentWeather(
+data class CurrentWeather(
     val cityName: String,
     val temperatureByKelvin: Double,
     val humidity :Int,

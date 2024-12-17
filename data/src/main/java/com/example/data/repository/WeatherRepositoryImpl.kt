@@ -1,12 +1,13 @@
 package com.example.data.repository
 
 import com.example.common.Resources
+import com.example.common.model.CountryInfo
+import com.example.common.model.CurrentWeather
 import com.example.data.local.WeatherSharedPreferences
 import com.example.data.mapper.toCountryInfo
 import com.example.data.mapper.toCurrentWeather
 import com.example.data.remote.WeatherApi
-import com.example.data.repository.model.CountryInfo
-import com.example.data.repository.model.CurrentWeather
+
 import com.example.data.util.extractErrorMessage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -2,7 +2,7 @@ package com.example.domain.usecase
 
 import com.example.common.Resources
 import com.example.data.repository.WeatherRepository
-import com.example.data.repository.model.CurrentWeather
+import com.example.common.model.CurrentWeather
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

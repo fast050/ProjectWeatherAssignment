@@ -1,4 +1,4 @@
-package com.example.data.repository.model
+package com.example.common.model
 
 data class CountryInfo(
     val id :Int ,
