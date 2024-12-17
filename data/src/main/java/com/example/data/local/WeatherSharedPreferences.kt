@@ -2,7 +2,7 @@ package com.example.data.local
 
 import android.content.Context
 import android.os.Build
-import com.example.data.repository.model.CurrentWeather
+import com.example.common.model.CurrentWeather
 import com.google.gson.Gson
 
 
