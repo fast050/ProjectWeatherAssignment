@@ -14,3 +14,5 @@ val GrayC4 = Color(0xFFC4C4C4)
 val GrayF2 = Color(0xFFF2F2F2)
 val Gray9A = Color(0xFF9A9A9A)
 val Black2C = Color(0xFF2C2C2C)
+
+val Red30 = Color(0xFFE33030)

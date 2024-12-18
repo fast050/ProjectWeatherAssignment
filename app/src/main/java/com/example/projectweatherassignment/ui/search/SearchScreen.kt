@@ -1,7 +1,6 @@
 package com.example.projectweatherassignment.ui.search
 
-import android.util.Log
-import androidx.compose.foundation.layout.Box
+ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,18 +10,26 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.projectweatherassignment.HomeScreenNav
 import com.example.projectweatherassignment.ui.common.SearchBar
+import com.example.projectweatherassignment.ui.theme.GrayF2
 import com.example.projectweatherassignment.ui.theme.ProjectWeatherAssignmentTheme
+import com.example.projectweatherassignment.ui.theme.Red30
 
 @Composable
 fun SearchScreen(
@@ -33,6 +40,7 @@ fun SearchScreen(
 
         val focusRequester = remember { FocusRequester() }
         val focusManager = LocalFocusManager.current
+        val snackBarHostState = remember { SnackbarHostState() }
 
         Scaffold(
             modifier = Modifier
@@ -87,6 +95,20 @@ fun SearchScreen(
                     }
                 }
 
+            },
+            snackbarHost = {
+                SnackbarHost(hostState = snackBarHostState) {
+                    Snackbar(
+                        containerColor = Red30,
+                        contentColor = GrayF2,
+                    ){
+                        Text(
+                            text = viewModel.state.errorMessage ?: "Ops! Something went wrong",
+                            fontSize = 12.sp ,
+                            fontWeight = Bold
+                        )
+                    }
+                }
             }
         )
 
@@ -101,6 +123,12 @@ fun SearchScreen(
         // Automatically request focus when the composable is displayed
         LaunchedEffect(Unit) {
             focusRequester.requestFocus()
+        }
+
+        LaunchedEffect(viewModel.state.errorMessage) {
+            viewModel.state.errorMessage?.let{ errorMessage ->
+                snackBarHostState.showSnackbar(message = errorMessage)
+            }
         }
 
 

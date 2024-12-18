@@ -27,6 +27,7 @@ import com.example.common.model.CurrentWeather
 import com.example.projectweatherassignment.R
 import com.example.projectweatherassignment.SearchScreenNav
 import com.example.projectweatherassignment.ui.common.SearchBar
+import com.example.projectweatherassignment.ui.theme.Black2C
 import com.example.projectweatherassignment.ui.theme.ProjectWeatherAssignmentTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -116,6 +117,7 @@ private fun NoCitySelectedItem() {
             text = stringResource(R.string.please_search_for_a_city),
             style = MaterialTheme.typography.bodySmall,
             fontWeight = SemiBold,
+            color = Black2C,
             modifier = Modifier.padding(top = 10.dp)
         )
     }
