@@ -48,11 +48,7 @@ This is a shared module that contains common data models and utilities used acro
 #### Key Responsibilities:
 - Defining shared data models like `CurrentWeather`, `WeatherForecast`, etc.
 - Utility classes or helper functions that are shared across modules.
-  
-#### Dependencies:
-- No dependencies (pure Kotlin module)
 
----
 
 ## Dependency Diagram
 
