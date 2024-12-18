@@ -99,7 +99,7 @@ Replace your_api_key_here with your actual API key from the weather API provider
 - **SharedPreferences**: For storing simple key-value pairs locally.
 - **Hilt**: For dependency injection across modules.
 - **Kotlin Coroutines**: For asynchronous operations like network requests.
-
+- **Coil**: For image loading.
 ---
 
 ## Architecture
