@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val getCountriesUseCase: GetCountriesUseCase,
-    private val getCurrentWeatherUseCase: GetMultipleCitiesWeatherUseCase,
+    private val getMultipleCitiesWeatherUseCase: GetMultipleCitiesWeatherUseCase,
     private val saveCurrentWeatherUseCase: SaveCurrentWeatherUseCase
 ) : ViewModel() {
 
@@ -32,12 +32,13 @@ class SearchViewModel @Inject constructor(
                 searchJob?.cancel()
                 searchJob = viewModelScope.launch {
                     delay(600L)
+
+                    if (event.query.isNotBlank())
                     getCountries(event.query)
                 }
             }
 
             is SearchEvent.OnCountryListResult -> {
-                println("log list compose SearchEvent.OnCountryListResult should be called")
                 getMultipleCitiesCurrentWeather(event.citiesNames)
             }
 
@@ -90,22 +91,18 @@ class SearchViewModel @Inject constructor(
     fun getMultipleCitiesCurrentWeather(
         cities: List<String>,
     ) = viewModelScope.launch {
-        getCurrentWeatherUseCase(cities).collect { result ->
+        getMultipleCitiesWeatherUseCase(cities).collect { result ->
 
             when (result) {
                 is Resources.Loading -> {
                     state = state.copy(
                         isLoading = true
                     )
-                    println("log list compose getMultipleCitiesCurrentWeather should be called Loding")
-
                 }
 
                 is Resources.Success -> {
 
                     val result = result.data
-                    println("log list result From CurrentApiMultipleCities $result")
-
 
                     if (result == null) {
                         state = state.copy(
@@ -119,10 +116,6 @@ class SearchViewModel @Inject constructor(
                             isLoading = false,
                             isEmpty = false
                         )
-
-                    println("log list compose getMultipleCitiesCurrentWeather should be called Success")
-
-
                 }
 
                 is Resources.Error -> {
@@ -130,9 +123,6 @@ class SearchViewModel @Inject constructor(
                         isLoading = false,
                         errorMessage = result.message
                     )
-
-                    println("log list compose getMultipleCitiesCurrentWeather should be called Error")
-
                 }
             }
         }
