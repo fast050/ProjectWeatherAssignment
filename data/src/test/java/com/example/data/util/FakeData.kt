@@ -1,9 +1,8 @@
 package com.example.data.util
 
+import com.example.common.model.CurrentWeather
 import com.example.data.remote.dto.CountryInfoResponse
 import com.example.data.remote.dto.CurrentWeatherResponse
-import com.example.data.repository.model.CountryInfo
-import kotlin.Double
 
 
 val countryInfoResponseFake = listOf<CountryInfoResponse>(
@@ -43,4 +42,14 @@ val currentWeatherResponseFake = CurrentWeatherResponse(
     location = CurrentWeatherResponse.Location(
         name = "Sharjah"
     )
+)
+
+val currentWeatherFake = CurrentWeather(
+    cityName = "Dubai",
+    temperatureByKelvin = 20.0,
+    humidity =  25,
+    uv = 2,
+    feelsLikeTemperatureByKelvin =  20.55,
+    weatherCondition = "Sunny",
+    weatherConditionIcon = "//cdn.weatherapi.com/weather/64x64/day/116.png",
 )

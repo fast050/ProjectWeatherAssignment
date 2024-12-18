@@ -6,6 +6,7 @@ import com.example.data.mapper.toCountryInfo
 import com.example.data.mapper.toCurrentWeather
 import com.example.data.remote.WeatherApi
 import com.example.data.util.countryInfoResponseFake
+import com.example.data.util.currentWeatherFake
 import com.example.data.util.currentWeatherResponseFake
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
@@ -87,6 +88,34 @@ class WeatherRepositoryImplTest {
 
             assertEquals(message , "Check your internet connection")
         }
+    }
+
+    @Test
+    fun `call SaveLocalWeather return data from getWeatherCurrent the same as saved`() = runTest {
+
+        `when`(weatherSharedPreferences.getWeatherCurrent())
+            .thenReturn(currentWeatherFake)
+
+        repository.saveLocalWeather(currentWeatherFake) // save data with shared preference
+
+        val expected = currentWeatherFake
+        val actual = repository.getLocalWeather()
+
+        assertEquals(expected , actual)
+    }
+
+    @Test
+    fun `call SaveLocalWeather return data from getWeatherCurrent null`() = runTest {
+
+        `when`(weatherSharedPreferences.getWeatherCurrent())
+            .thenReturn(null)
+
+        repository.saveLocalWeather(currentWeatherFake) // save data with shared preference
+
+        val expected = null
+        val actual = repository.getLocalWeather()
+
+        assertEquals(expected , actual)
     }
 
 }

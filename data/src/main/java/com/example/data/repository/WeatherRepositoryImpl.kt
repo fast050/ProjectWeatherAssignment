@@ -48,24 +48,22 @@ class WeatherRepositoryImpl @Inject constructor(
         }
     }
 
-
+    /**
+     *  if query is null, get data from local storage
+     *
+     */
     override fun getCurrentWeather(query: String): Flow<Resources<CurrentWeather>> = flow {
         emit(Resources.Loading())
 
-        val localCurrentWeather = localSource.getWeatherCurrent() // get data in shared preference
-
         try {
-            val remoteCurrentWeather = remoteSource.getCurrentWeather(query = query)
-            localSource.saveCurrentWeather(remoteCurrentWeather.toCurrentWeather()) // save data in shared preference
-
-            emit(Resources.Success(remoteCurrentWeather.toCurrentWeather()))
-
+           val remoteCurrentWeather = remoteSource.getCurrentWeather(query = query)
+           emit(Resources.Success(remoteCurrentWeather.toCurrentWeather()))
         }
         catch (e: HttpException) {
             emit(
                 Resources.Error(
                     message = e.extractErrorMessage(),
-                    data = localCurrentWeather
+                    data = null
                 )
             )
         }
@@ -73,10 +71,18 @@ class WeatherRepositoryImpl @Inject constructor(
             emit(
                 Resources.Error(
                     message = e.message ?: "Check your internet connection",
-                    data = localCurrentWeather
+                    data = null
                 )
             )
         }
+    }
+
+    override fun saveLocalWeather(currentWeather: CurrentWeather) {
+        localSource.saveCurrentWeather(currentWeather) // save data in shared preference
+    }
+
+    override fun getLocalWeather(): CurrentWeather? {
+        return localSource.getWeatherCurrent()
     }
 
 

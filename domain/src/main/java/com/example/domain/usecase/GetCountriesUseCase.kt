@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
-class GetCountriesUseCase @Inject constructor(private val repository: WeatherRepository) {
+class GetCountriesUseCase @Inject constructor(val repository: WeatherRepository) {
    operator fun invoke(query: String) : Flow<Resources<List<CountryInfo>>> =
        repository.getCountries(query)
 }

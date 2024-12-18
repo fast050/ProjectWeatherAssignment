@@ -1,9 +1,7 @@
 package com.example.domain.util
 
-import com.example.data.remote.dto.CountryInfoResponse
-import com.example.data.remote.dto.CurrentWeatherResponse
-import com.example.data.repository.model.CountryInfo
-import com.example.data.repository.model.CurrentWeather
+import com.example.common.model.CountryInfo
+import com.example.common.model.CurrentWeather
 
 
 
