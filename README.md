@@ -54,7 +54,7 @@ This is a shared module that contains common data models and utilities used acro
 
 ```plaintext
 +-----------------+        +----------------+        +-------------------+       
-|   Presentation  | <----> |     Domain     | <----> |      Data         | 
+|   Presentation  |  ----> |     Domain     |  ----> |      Data         | 
 +-----------------+        +----------------+        +-------------------+ 
              |                     |                   |
              +----------------------------------------+--
